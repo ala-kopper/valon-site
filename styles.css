@@ -175,7 +175,7 @@ body {
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border: none;
     border-radius: 8px;
     font-family: 'Inter', sans-serif;
     font-size: 0.85rem;
@@ -184,12 +184,10 @@ body {
     margin-bottom: 3rem;
     cursor: pointer;
     transition: color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
                 transform 0.3s;
 }
 
 .eyebrow-btn:hover {
-    border-color: rgba(255, 255, 255, 0.8);
     transform: translateX(4px);
 }
 
@@ -465,6 +463,14 @@ body {
 .value-prop {
     display: flex;
     flex-direction: column;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.value-prop.fade-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .value-prop-title {
@@ -899,7 +905,7 @@ video.ecosystem-image {
     background: linear-gradient(180deg, var(--white) 0%, #F8F8F8 100%);
     color: var(--gray-dark);
     min-height: 60vh;
-    padding-top: 12rem;
+    padding: 16rem 2rem 16rem;
 }
 
 .trust-section .mega-title {
@@ -919,7 +925,9 @@ video.ecosystem-image {
     background: #1a1a1a;
     color: white;
     padding: 12rem 2rem 8rem;
-    min-height: auto;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .stats-header {
@@ -1238,8 +1246,15 @@ video.ecosystem-image {
   justify-content: center;
   text-align: center;
   padding: 10rem 2rem;
-  background: linear-gradient(to bottom, #ffffff 0%, #e8f0f8 15%, #c5d9f0 35%, #87b8e0 55%, #5a8fd4 75%, #1a4b9c 100%);
-  transition: background 0.1s linear;
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #ffffff 40%,
+    #f5f9fc 55%,
+    #e0ecf5 70%,
+    #a8c8e8 85%,
+    #5a8fd4 100%
+  ) !important;
 }
 
 .cta-section .cta-headline {
@@ -1273,12 +1288,8 @@ video.ecosystem-image {
   text-decoration: none;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.cta-section.dark .cta-headline { color: #ffffff; }
-.cta-section.dark .cta-subtitle { color: rgba(255,255,255,0.7); }
-.cta-section.dark .cta-btn { background: #ffffff; color: #1a1a1a; }
 
 .cta-section .cta-btn:hover {
     transform: translateY(-3px);
@@ -1664,59 +1675,88 @@ video.ecosystem-image {
 
 /* Footer */
 .footer {
-    background: var(--black);
+    background: #5a8fd4;
     color: white;
     padding: 4rem 2rem 2rem;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: 1fr 2fr 1fr;
     gap: 4rem;
-    margin-bottom: 3rem;
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+    align-items: start;
 }
 
-.footer-brand p {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-top: 1rem;
-    opacity: 0.7;
+.footer-brand {
+    display: flex;
+    align-items: center;
+}
+
+.footer-logo {
+    height: 32px;
+    width: auto;
+    filter: brightness(0) invert(1);
 }
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
 }
 
 .footer-column h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    opacity: 0.6;
+    color: white;
 }
 
 .footer-column a {
     display: block;
+    font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    color: white;
     text-decoration: none;
-    margin-bottom: 0.75rem;
-    transition: color 0.3s;
+    margin-bottom: 0.875rem;
+    opacity: 0.8;
+    transition: opacity 0.3s;
 }
 
 .footer-column a:hover {
+    opacity: 1;
+}
+
+.footer-social h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    opacity: 0.6;
     color: white;
 }
 
-.footer-bottom {
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
+.footer-social a {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s;
 }
 
-.footer-bottom p {
-    font-size: 0.875rem;
-    opacity: 0.5;
+.footer-social a:hover {
+    opacity: 1;
 }
 
 /* Responsive Design */
@@ -1886,11 +1926,12 @@ video.ecosystem-image {
 
     .footer-content {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 3rem;
     }
 
     .footer-links {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
     .orbit-visual {

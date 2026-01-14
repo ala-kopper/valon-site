@@ -434,34 +434,28 @@ if (trustSection) {
     trustObserver.observe(trustSection);
 }
 
-function handleCtaScroll() {
-  const cta = document.querySelector('.cta-section');
-  if (!cta) return;
-  const rect = cta.getBoundingClientRect();
+// Value props staggered fade-in animation
+const valuePropsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const valueProps = entry.target.querySelectorAll('.value-prop');
+            valueProps.forEach((prop, index) => {
+                setTimeout(() => {
+                    prop.classList.add('fade-in');
+                }, index * 150); // 150ms delay between each
+            });
+            valuePropsObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.2
+});
 
-  // Much more gradual progress calculation - extends the transition range significantly
-  const rawProgress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (rect.height + window.innerHeight * 2)));
-
-  // Apply easing function for even smoother transition
-  const progress = rawProgress * rawProgress * (3 - 2 * rawProgress); // Smooth step easing
-
-  const blueEnd = { r: 26, g: 75, b: 156 };
-  const blackEnd = { r: 10, g: 10, b: 10 };
-
-  const endR = Math.round(blueEnd.r + (blackEnd.r - blueEnd.r) * progress);
-  const endG = Math.round(blueEnd.g + (blackEnd.g - blueEnd.g) * progress);
-  const endB = Math.round(blueEnd.b + (blackEnd.b - blueEnd.b) * progress);
-
-  const midR = Math.round(90 + (40 - 90) * progress);
-  const midG = Math.round(143 + (40 - 143) * progress);
-  const midB = Math.round(212 + (40 - 212) * progress);
-
-  cta.style.background = `linear-gradient(to bottom, #ffffff 0%, #e8f0f8 15%, rgb(${197 - progress * 60}, ${217 - progress * 60}, ${240 - progress * 80}) 35%, rgb(${midR}, ${midG}, ${midB}) 55%, rgb(${endR + 30}, ${endG + 30}, ${endB + 30}) 75%, rgb(${endR}, ${endG}, ${endB}) 100%)`;
-
-  cta.classList.toggle('dark', progress > 0.65);
+const valuePropsSection = document.querySelector('.value-props-section');
+if (valuePropsSection) {
+    valuePropsObserver.observe(valuePropsSection);
 }
 
-window.addEventListener('scroll', () => requestAnimationFrame(handleCtaScroll));
-handleCtaScroll();
+// CTA scroll handler removed - using static gradient instead
 
 console.log('🚀 Valon website loaded with sophisticated scroll interactions');

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valon CTA Section – Linear Gradient</title>
+  <title>Valon CTA Section – Gradual Light Gradient</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -26,8 +26,9 @@
     }
 
     .previous-section h2 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 2.5rem;
+      font-weight: 600;
       color: #1a1a1a;
       margin-bottom: 1rem;
     }
@@ -37,7 +38,7 @@
       font-size: 1.1rem;
     }
 
-    /* CTA Section with linear gradient */
+    /* CTA Section with gradual, lighter gradient */
     .cta-section {
       min-height: 90vh;
       display: flex;
@@ -47,18 +48,17 @@
       text-align: center;
       padding: 10rem 2rem;
       
-      /* Linear gradient: white at top fading to blue at bottom */
+      /* Gradual gradient: white holds longer, ends at medium blue */
       background: linear-gradient(
         to bottom,
         #ffffff 0%,
-        #e8f0f8 15%,
-        #c5d9f0 35%,
-        #87b8e0 55%,
-        #5a8fd4 75%,
+        #ffffff 20%,
+        #f0f5fa 35%,
+        #d4e4f7 50%,
+        #87b8e0 70%,
+        #5a8fd4 85%,
         #1a4b9c 100%
       );
-      
-      position: relative;
     }
 
     .cta-content {
@@ -66,19 +66,16 @@
     }
 
     .cta-headline {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      font-weight: 400;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 3.25rem);
+      font-weight: 600;
       color: #1a1a1a;
       line-height: 1.2;
       margin-bottom: 1.5rem;
-      
-      /* Text color transitions as you scroll down the gradient */
-      /* At top it's dark, could transition to white at bottom */
     }
 
     .cta-subtitle {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: rgba(26, 26, 26, 0.75);
       line-height: 1.6;
       max-width: 500px;
@@ -101,20 +98,10 @@
 
     .cta-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
     }
 
-    /* Optional: Add a subtle noise texture overlay for depth */
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      opacity: 0.03;
-      pointer-events: none;
-    }
-
-    /* Fake footer to show context */
+    /* Footer */
     .footer {
       background: #0a0a0a;
       padding: 4rem 2rem;
@@ -141,7 +128,7 @@
     <p>This is the section above the CTA — notice how the white seamlessly fades into the gradient below.</p>
   </section>
 
-  <!-- CTA Section with linear gradient -->
+  <!-- CTA Section with gradual lighter gradient -->
   <section class="cta-section">
     <div class="cta-content">
       <h2 class="cta-headline">See Valon in production</h2>
@@ -150,7 +137,7 @@
     </div>
   </section>
 
-  <!-- Fake footer for context -->
+  <!-- Footer for context -->
   <footer class="footer">
     <p>© 2026 Valon. All rights reserved.</p>
   </footer>
