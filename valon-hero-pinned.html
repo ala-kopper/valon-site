@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valon Hero – Pinned Scroll Transition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Blue theme (initial) */
+      --bg-top-blue: #1a4b9c;
+      --bg-mid-blue: #5a8fd4;
+      --bg-bottom-blue: #d4e4f7;
+      --text-primary-blue: #ffffff;
+      --text-secondary-blue: rgba(255, 255, 255, 0.85);
+      --logo-color-blue: #ffffff;
+      --nav-color-blue: #ffffff;
+      --pill-bg-blue: rgba(255, 255, 255, 0.15);
+      --pill-border-blue: rgba(255, 255, 255, 0.3);
+      --pill-text-blue: #ffffff;
+      
+      /* Gold theme (after scroll) */
+      --bg-top-gold: #c9a227;
+      --bg-mid-gold: #d4bc6a;
+      --bg-bottom-gold: #f5edd6;
+      --text-primary-gold: #4a3f1f;
+      --text-secondary-gold: rgba(74, 63, 31, 0.8);
+      --logo-color-gold: #6b5a2a;
+      --nav-color-gold: #4a3f1f;
+      --pill-bg-gold: rgba(74, 63, 31, 0.08);
+      --pill-border-gold: rgba(74, 63, 31, 0.2);
+      --pill-text-gold: #5a4a25;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f5f5f5;
+    }
+
+    /* Scroll container - this is the "runway" for the pinned effect */
+    .hero-scroll-container {
+      height: 200vh; /* Extra scroll distance for the transition */
+      position: relative;
+    }
+
+    .hero {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Gradient layers for smooth interpolation */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg-blue {
+      background: radial-gradient(ellipse at 50% 0%, var(--bg-top-blue) 0%, var(--bg-mid-blue) 50%, var(--bg-bottom-blue) 100%);
+      opacity: 1;
+      transition: opacity 0.1s linear;
+    }
+
+    .hero-bg-gold {
+      background: radial-gradient(ellipse at 50% 0%, var(--bg-top-gold) 0%, var(--bg-mid-gold) 50%, var(--bg-bottom-gold) 100%);
+      opacity: 0;
+      transition: opacity 0.1s linear;
+    }
+
+    /* Nav */
+    .nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--logo-color-blue);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: color 0.15s linear;
+    }
+
+    .logo.gold { color: var(--logo-color-gold); }
+
+    .logo-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--nav-color-blue);
+      text-decoration: none;
+      transition: color 0.15s linear, opacity 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.7;
+    }
+
+    .nav-links.gold a {
+      color: var(--nav-color-gold);
+    }
+
+    .login-btn {
+      background: #ffffff;
+      color: #1a1a1a !important;
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 1 !important;
+    }
+
+    /* Hero content */
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 2rem;
+      padding-bottom: 6rem;
+    }
+
+    .announcement-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      background: var(--pill-bg-blue);
+      border: 1px solid var(--pill-border-blue);
+      border-radius: 100px;
+      font-size: 0.9rem;
+      color: var(--pill-text-blue);
+      margin-bottom: 2.5rem;
+      transition: all 0.15s linear;
+    }
+
+    .announcement-pill.gold {
+      background: var(--pill-bg-gold);
+      border-color: var(--pill-border-gold);
+      color: var(--pill-text-gold);
+    }
+
+    .announcement-pill::after {
+      content: '→';
+      font-size: 0.85rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 400;
+      color: var(--text-primary-blue);
+      line-height: 1.1;
+      margin-bottom: 1.75rem;
+      max-width: 700px;
+      transition: color 0.15s linear;
+    }
+
+    .hero-title.gold {
+      color: var(--text-primary-gold);
+    }
+
+    .hero-title em {
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary-blue);
+      line-height: 1.6;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      transition: color 0.15s linear;
+    }
+
+    .hero-subtitle.gold {
+      color: var(--text-secondary-gold);
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: #1a1a1a;
+      color: #ffffff;
+      padding: 1rem 2rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    /* Scroll progress indicator */
+    .scroll-progress {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 100;
+      transition: opacity 0.3s ease;
+    }
+
+    .scroll-progress.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .progress-text {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-secondary-blue);
+      transition: color 0.15s linear;
+    }
+
+    .progress-text.gold {
+      color: var(--text-secondary-gold);
+    }
+
+    .progress-track {
+      width: 40px;
+      height: 4px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: background 0.15s linear;
+    }
+
+    .progress-track.gold {
+      background: rgba(74, 63, 31, 0.2);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #ffffff;
+      border-radius: 2px;
+      transition: background 0.15s linear;
+    }
+
+    .progress-fill.gold {
+      background: var(--text-primary-gold);
+    }
+
+    /* Content below hero */
+    .content-section {
+      background: #ffffff;
+      min-height: 150vh;
+      padding: 6rem 3rem;
+    }
+
+    .content-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #1a1a1a;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-section p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .content-section code {
+      background: #f0f0f0;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Hero with scroll container for pinned effect -->
+  <div class="hero-scroll-container" id="heroContainer">
+    <header class="hero" id="hero">
+      <!-- Background layers -->
+      <div class="hero-bg hero-bg-blue" id="bgBlue"></div>
+      <div class="hero-bg hero-bg-gold" id="bgGold"></div>
+      
+      <nav class="nav">
+        <div class="logo" id="logo">
+          Valon
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="3" />
+            <circle cx="12" cy="4" r="2" />
+            <circle cx="12" cy="20" r="2" />
+            <circle cx="4" cy="12" r="2" />
+            <circle cx="20" cy="12" r="2" />
+            <circle cx="6.5" cy="6.5" r="1.5" />
+            <circle cx="17.5" cy="6.5" r="1.5" />
+            <circle cx="6.5" cy="17.5" r="1.5" />
+            <circle cx="17.5" cy="17.5" r="1.5" />
+          </svg>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="#">Home</a>
+          <a href="#">Our Story</a>
+          <a href="#">Company</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+          <a href="#" class="login-btn">Log In</a>
+        </div>
+      </nav>
+      
+      <div class="hero-content">
+        <span class="announcement-pill" id="pill">Valon Raises Series C</span>
+        <h1 class="hero-title" id="title">A <em>Revolution</em> in Regulated Finance</h1>
+        <p class="hero-subtitle" id="subtitle">Valon is building the AI-native operating system for regulated services, starting with mortgage servicing. Join us to build the future of financial infrastructure.</p>
+        <a href="#" class="cta-btn">See Our Open Roles</a>
+      </div>
+    </header>
+  </div>
+
+  <!-- Scroll progress indicator -->
+  <div class="scroll-progress" id="scrollProgress">
+    <span class="progress-text" id="progressText">Scroll</span>
+    <div class="progress-track" id="progressTrack">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <h2>Pinned scroll + color transition</h2>
+    <p>The hero stays <strong>sticky</strong> for the first 100vh of scroll. During that scroll distance, the color transitions from blue → gold.</p>
+    <p>Once the transition completes, the hero releases and scrolls away naturally.</p>
+    <p><strong>For Claude Code:</strong> The key is using <code>position: sticky</code> on the hero inside a taller scroll container (200vh). The scroll progress within that container drives the color interpolation.</p>
+    <p>Scroll back up to see it reverse!</p>
+  </section>
+
+  <script>
+    const heroContainer = document.getElementById('heroContainer');
+    const bgBlue = document.getElementById('bgBlue');
+    const bgGold = document.getElementById('bgGold');
+    const logo = document.getElementById('logo');
+    const navLinks = document.getElementById('navLinks');
+    const pill = document.getElementById('pill');
+    const title = document.getElementById('title');
+    const subtitle = document.getElementById('subtitle');
+    const scrollProgress = document.getElementById('scrollProgress');
+    const progressText = document.getElementById('progressText');
+    const progressTrack = document.getElementById('progressTrack');
+    const progressFill = document.getElementById('progressFill');
+    
+    // The scroll distance over which the transition happens
+    const TRANSITION_DISTANCE = window.innerHeight;
+    
+    function updateTransition() {
+      const containerRect = heroContainer.getBoundingClientRect();
+      const scrolled = -containerRect.top;
+      
+      // Calculate progress (0 to 1) through the transition zone
+      const progress = Math.max(0, Math.min(1, scrolled / TRANSITION_DISTANCE));
+      
+      // Update background opacity for crossfade
+      bgBlue.style.opacity = 1 - progress;
+      bgGold.style.opacity = progress;
+      
+      // Update progress indicator
+      progressFill.style.width = `${progress * 100}%`;
+      
+      // Toggle classes based on progress threshold (50%)
+      const isGold = progress > 0.5;
+      
+      logo.classList.toggle('gold', isGold);
+      navLinks.classList.toggle('gold', isGold);
+      pill.classList.toggle('gold', isGold);
+      title.classList.toggle('gold', isGold);
+      subtitle.classList.toggle('gold', isGold);
+      progressText.classList.toggle('gold', isGold);
+      progressTrack.classList.toggle('gold', isGold);
+      progressFill.classList.toggle('gold', isGold);
+      
+      // Hide scroll indicator when transition is complete
+      scrollProgress.classList.toggle('hidden', progress >= 1);
+    }
+    
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(updateTransition);
+    });
+    
+    // Initial state
+    updateTransition();
+  </script>
+</body>
+</html>

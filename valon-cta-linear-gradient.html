@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valon CTA Section – Linear Gradient</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* Fake previous section to show the transition */
+    .previous-section {
+      background: #ffffff;
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .previous-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+    }
+
+    .previous-section p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    /* CTA Section with linear gradient */
+    .cta-section {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10rem 2rem;
+      
+      /* Linear gradient: white at top fading to blue at bottom */
+      background: linear-gradient(
+        to bottom,
+        #ffffff 0%,
+        #e8f0f8 15%,
+        #c5d9f0 35%,
+        #87b8e0 55%,
+        #5a8fd4 75%,
+        #1a4b9c 100%
+      );
+      
+      position: relative;
+    }
+
+    .cta-content {
+      max-width: 700px;
+    }
+
+    .cta-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 400;
+      color: #1a1a1a;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      
+      /* Text color transitions as you scroll down the gradient */
+      /* At top it's dark, could transition to white at bottom */
+    }
+
+    .cta-subtitle {
+      font-size: 1.15rem;
+      color: rgba(26, 26, 26, 0.75);
+      line-height: 1.6;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: #1a1a1a;
+      color: #ffffff;
+      padding: 1.1rem 2.5rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Optional: Add a subtle noise texture overlay for depth */
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    /* Fake footer to show context */
+    .footer {
+      background: #0a0a0a;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .footer p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .cta-section {
+        min-height: 70vh;
+        padding: 6rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fake previous section to show the white-to-gradient transition -->
+  <section class="previous-section">
+    <h2>Inside Valon</h2>
+    <p>This is the section above the CTA — notice how the white seamlessly fades into the gradient below.</p>
+  </section>
+
+  <!-- CTA Section with linear gradient -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2 class="cta-headline">See Valon in production</h2>
+      <p class="cta-subtitle">Explore how Valon replaces legacy infrastructure and transforms unit economics at scale.</p>
+      <a href="#" class="cta-btn">Request a Demo</a>
+    </div>
+  </section>
+
+  <!-- Fake footer for context -->
+  <footer class="footer">
+    <p>© 2026 Valon. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valon Stats Section – Animated</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #121212;
+    }
+
+    .stats-section {
+      background: #1a1a1a;
+      padding: 5rem 4rem 6rem;
+      min-height: 100vh;
+    }
+
+    /* Header - two column layout */
+    .stats-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+      align-items: start;
+    }
+
+    .stats-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.15;
+    }
+
+    .stats-description {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      max-width: 480px;
+      padding-top: 0.5rem;
+    }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .stat-card {
+      background: #2a2a2a;
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-label {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stats-section {
+        padding: 3rem 1.5rem 4rem;
+      }
+
+      .stats-header {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="stats-section">
+    <!-- Header -->
+    <header class="stats-header">
+      <h2 class="stats-headline">Proven where complexity is highest</h2>
+      <p class="stats-description">Mortgage servicing is one of the most regulated, operationally complex categories in financial services. We chose it deliberately.</p>
+    </header>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-number" data-target="600" data-prefix="~" data-suffix="K">~0K</span>
+        <span class="stat-label">Mortgages serviced</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="130" data-prefix="~$" data-suffix="B">~$0B</span>
+        <span class="stat-label">Unpaid principal balance</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="90" data-prefix="" data-suffix="%">0%</span>
+        <span class="stat-label">Customer satisfaction</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number" data-target="60" data-prefix="" data-suffix="%+">0%+</span>
+        <span class="stat-label">Variable EBITDA margins at scale</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Count-up animation
+    function animateCount(element, target, duration, prefix, suffix) {
+      const start = 0;
+      const startTime = performance.now();
+      
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
+      
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutQuart(progress);
+        const current = Math.floor(start + (target - start) * easedProgress);
+        
+        element.textContent = prefix + current + suffix;
+        
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+      
+      requestAnimationFrame(update);
+    }
+
+    // Intersection Observer to trigger animation when visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statNumbers = entry.target.querySelectorAll('.stat-number');
+          
+          statNumbers.forEach((stat, index) => {
+            const target = parseInt(stat.dataset.target);
+            const prefix = stat.dataset.prefix || '';
+            const suffix = stat.dataset.suffix || '';
+            
+            // Stagger the animations slightly
+            setTimeout(() => {
+              animateCount(stat, target, 2000, prefix, suffix);
+            }, index * 150);
+          });
+          
+          // Only animate once
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    // Observe the stats grid
+    observer.observe(document.querySelector('.stats-grid'));
+  </script>
+</body>
+</html>
