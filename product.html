@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValonOS: AI-Native Servicing Platform</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="product-styles.css">
+</head>
+<body>
+    <header class="navbar light-theme" id="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="Images/valon logo.png" alt="Valon" class="logo-image" id="logoImage">
+            </a>
+        </div>
+        <div class="nav-right">
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="#overview" class="nav-link">Our Story</a>
+                <a href="#components" class="nav-link">Company</a>
+                <a href="#articles" class="nav-link">Blog</a>
+                <a href="#careers" class="nav-link">Careers</a>
+            </nav>
+            <button class="login-btn">Log In</button>
+        </div>
+    </header>
+
+    <!-- Hero Scroll Container -->
+    <div class="hero-scroll-container">
+        <section class="hero" id="hero">
+            <!-- Background layers -->
+            <div class="hero-bg">
+                <div class="hero-bg-gold" id="bgGold"></div>
+                <div class="hero-bg-blue" id="bgBlue"></div>
+            </div>
+
+            <!-- Blue state text (shows first) -->
+            <div class="hero-text-block blue-text" id="blueText">
+                <h1 class="hero-headline">
+                    <span class="word">ValonOS:</span>
+                    <span class="word">AI-Native</span>
+                </h1>
+                <p class="hero-headline-secondary">
+                    <span class="word">Servicing</span>
+                    <span class="word">Platform</span>
+                </p>
+            </div>
+
+            <!-- Gold state text (shows after scroll) -->
+            <div class="hero-text-block gold-text" id="goldText">
+                <h1 class="hero-headline">
+                    <span class="word">One</span>
+                    <span class="word">unified</span>
+                    <span class="word">system.</span>
+                </h1>
+                <p class="hero-headline-secondary">
+                    <span class="word">Infinite operational leverage.</span>
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Main Content (appears above fixed hero) -->
+    <main class="main-content">
+    <!-- What We're Building -->
+    <section class="section" id="overview">
+        <div class="section-header">
+            <h2>What we're building</h2>
+        </div>
+        <div class="section-content">
+            <p>ValonOS is an AI-native, unified system of record for mortgage servicing. It replaces the fragmented legacy stack that most servicers rely on today.</p>
+            <p>We spent half a decade operating a competitive mortgage servicer to learn every regulation, workflow, and edge case firsthand. ValonOS is the result: a platform built from real operational experience, not theoretical design.</p>
+            <p>We now sell this system to other servicers so they can run better operations with less cost, higher compliance, and continuous improvement through AI.</p>
+        </div>
+    </section>
+
+    <!-- Why It Matters -->
+    <section class="section highlight-section">
+        <h2>Most servicers run on 20+ disconnected systems. Regulations change constantly. Manual processes create errors and compliance risk.</h2>
+        <p>Without a single integrated foundation, servicers patch over problems instead of solving them. ValonOS gives them that foundation.</p>
+    </section>
+
+    <!-- How ValonOS Works -->
+    <section class="section" id="how-it-works">
+        <div class="section-header">
+            <h2>How ValonOS Works</h2>
+        </div>
+        <div class="section-content">
+            <p>ValonOS is a unified platform built from first principles. It brings accounting, workflows, task orchestration, and auditability into one coherent system. What once required more than 30 disconnected tools can now run inside a single platform.</p>
+            <p>We have built the foundation and proven its stability through real-world operations. Many of the system's core components are now in development or on the roadmap, which means the architecture is still taking shape. For engineers, that makes this one of the most exciting stages to join. You will help define the core abstractions, design how systems talk to each other, and bring the platform to life.</p>
+        </div>
+    </section>
+
+    <!-- Core Components Scroll Section -->
+    <section class="components-section" id="components">
+        <div class="components-container">
+            <!-- Section Header -->
+            <div class="components-header">
+                <span class="components-eyebrow">Platform Architecture</span>
+                <h2 class="components-title">Core Components</h2>
+                <p class="components-description">
+                    Each component is critical to the leverage generated by the platform. Together, they treat accounting, workflows, tasks, and permissions as first-class concepts.
+                </p>
+            </div>
+
+            <!-- Scroll Layout -->
+            <div class="scroll-layout">
+                <!-- Left Nav -->
+                <nav class="step-nav">
+                    <div class="step-nav-item active" data-step="ufs">
+                        <span>UFS</span>
+                        <span class="step-nav-dot"></span>
+                    </div>
+                    <div class="step-nav-item" data-step="tasks">
+                        <span>Tasks</span>
+                        <span class="step-nav-dot"></span>
+                    </div>
+                    <div class="step-nav-item" data-step="workflows">
+                        <span>Workflows</span>
+                        <span class="step-nav-dot"></span>
+                    </div>
+                    <div class="step-nav-item" data-step="actions">
+                        <span>Actions</span>
+                        <span class="step-nav-dot"></span>
+                    </div>
+                    <div class="step-nav-item" data-step="ai-agents">
+                        <span>AI Agents</span>
+                        <span class="step-nav-dot"></span>
+                    </div>
+                    <div class="step-nav-item" data-step="applications">
+                        <span>Applications</span>
+                        <span class="step-nav-dot"></span>
+                    </div>
+                </nav>
+
+                <!-- Center Visual -->
+                <div class="visual-column">
+                    <div class="visual-card">
+                        <!-- UFS Visual -->
+                        <div class="visual-content active" data-visual="ufs">
+                            <div class="mock-window">
+                                <div class="mock-window-header">
+                                    <span class="mock-dot red"></span>
+                                    <span class="mock-dot yellow"></span>
+                                    <span class="mock-dot green"></span>
+                                </div>
+                                <div class="mock-window-body">
+                                    <div class="mock-title">Ledger Entry</div>
+                                    <div class="mock-input">Journal #JE-2024-0847</div>
+                                    <div class="mock-label">Amount</div>
+                                    <div class="mock-slider-track">
+                                        <div class="mock-slider-fill"></div>
+                                        <div class="mock-slider-thumb"></div>
+                                    </div>
+                                    <div class="mock-input">$24,500.00</div>
+                                    <div class="mock-row">
+                                        <div class="mock-link">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M9 12l2 2 4-4"/></svg>
+                                            Reconciled
+                                        </div>
+                                        <div class="mock-btn">Post Entry</div>
+                                    </div>
+                                    <div class="mock-cta-banner">
+                                        <span class="banner-content">
+                                            <span class="mock-cta-dot"></span>
+                                            Auto-reconciliation active
+                                        </span>
+                                        <span>→</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tasks Visual -->
+                        <div class="visual-content" data-visual="tasks">
+                            <div class="mock-window">
+                                <div class="mock-window-header">
+                                    <span class="mock-dot red"></span>
+                                    <span class="mock-dot yellow"></span>
+                                    <span class="mock-dot green"></span>
+                                </div>
+                                <div class="mock-window-body">
+                                    <div class="mock-title">Task Queue</div>
+                                    <div class="mock-input">Filter by priority...</div>
+                                    <div class="task-list">
+                                        <div class="task-item">
+                                            <span>Escrow Analysis</span>
+                                            <span class="priority high">HIGH</span>
+                                        </div>
+                                        <div class="task-item">
+                                            <span>Payment Processing</span>
+                                            <span class="priority normal">NORMAL</span>
+                                        </div>
+                                        <div class="task-item">
+                                            <span>Document Review</span>
+                                            <span class="priority normal">NORMAL</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Workflows Visual -->
+                        <div class="visual-content" data-visual="workflows">
+                            <div class="mock-window">
+                                <div class="mock-window-header">
+                                    <span class="mock-dot red"></span>
+                                    <span class="mock-dot yellow"></span>
+                                    <span class="mock-dot green"></span>
+                                </div>
+                                <div class="mock-window-body">
+                                    <div class="mock-title">Workflow Builder</div>
+                                    <div class="workflow-steps">
+                                        <div class="workflow-node trigger">Trigger: Payment Received</div>
+                                        <div class="workflow-line"></div>
+                                        <div class="workflow-node">Validate Amount</div>
+                                        <div class="workflow-line"></div>
+                                        <div class="workflow-node">Apply to Loan</div>
+                                        <div class="workflow-line"></div>
+                                        <div class="workflow-node action">Send Confirmation</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions Visual -->
+                        <div class="visual-content" data-visual="actions">
+                            <div class="mock-window">
+                                <div class="mock-window-header">
+                                    <span class="mock-dot red"></span>
+                                    <span class="mock-dot yellow"></span>
+                                    <span class="mock-dot green"></span>
+                                </div>
+                                <div class="mock-window-body">
+                                    <div class="mock-title">Actions Library</div>
+                                    <div class="action-list">
+                                        <div class="action-item">
+                                            <div class="action-name">run_escrow_analysis</div>
+                                            <div class="action-desc">Calculates escrow requirements</div>
+                                        </div>
+                                        <div class="action-item">
+                                            <div class="action-name">process_payment</div>
+                                            <div class="action-desc">Applies payment to loan</div>
+                                        </div>
+                                        <div class="action-item">
+                                            <div class="action-name">generate_statement</div>
+                                            <div class="action-desc">Creates monthly statement</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Agents Visual -->
+                        <div class="visual-content" data-visual="ai-agents">
+                            <div class="mock-window">
+                                <div class="mock-window-header">
+                                    <span class="mock-dot red"></span>
+                                    <span class="mock-dot yellow"></span>
+                                    <span class="mock-dot green"></span>
+                                </div>
+                                <div class="mock-window-body">
+                                    <div class="mock-title">AI Suggestion</div>
+                                    <div class="ai-suggestion-box">
+                                        <div class="ai-context">Unidentified check detected</div>
+                                        <div class="ai-match">Match found: Loan #4847291</div>
+                                        <div class="ai-confidence">94% confidence</div>
+                                    </div>
+                                    <div class="mock-row">
+                                        <div class="mock-btn gold">Accept</div>
+                                        <div class="mock-btn outline">Review</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Applications Visual -->
+                        <div class="visual-content" data-visual="applications">
+                            <div class="mock-window">
+                                <div class="mock-window-header">
+                                    <span class="mock-dot red"></span>
+                                    <span class="mock-dot yellow"></span>
+                                    <span class="mock-dot green"></span>
+                                </div>
+                                <div class="mock-window-body">
+                                    <div class="mock-title">Application Suite</div>
+                                    <div class="app-grid">
+                                        <div class="app-item">
+                                            <div class="app-icon">🏠</div>
+                                            <div class="app-name">Homeowner</div>
+                                        </div>
+                                        <div class="app-item">
+                                            <div class="app-icon">⚙️</div>
+                                            <div class="app-name">Servicer</div>
+                                        </div>
+                                        <div class="app-item">
+                                            <div class="app-icon">👤</div>
+                                            <div class="app-name">Admin</div>
+                                        </div>
+                                        <div class="app-item">
+                                            <div class="app-icon">🔗</div>
+                                            <div class="app-name">API</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="steps-column">
+                    <!-- UFS -->
+                    <div class="step-content" data-step="ufs">
+                        <span class="step-badge live">
+                            <span class="step-badge-dot"></span>
+                            Live
+                        </span>
+                        <span class="step-number">01</span>
+                        <h3 class="step-title">Unified Financial Service</h3>
+                        <p class="step-description">
+                            Multi-ledger, double-entry accounting and treasury layer. Every journal entry links to actual bank activity for per-transaction reconciliation.
+                        </p>
+                        <ul class="step-features">
+                            <li>Models multiple parties (system, clients, loans)</li>
+                            <li>Cross-ledger links with dual-temporal tracking</li>
+                            <li>Per-transaction reconciliation with bank activity</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tasks -->
+                    <div class="step-content" data-step="tasks">
+                        <span class="step-badge dev">
+                            <span class="step-badge-dot"></span>
+                            In Development
+                        </span>
+                        <span class="step-number">02</span>
+                        <h3 class="step-title">Tasks</h3>
+                        <p class="step-description">
+                            A unified task management system that orchestrates work across teams, ensuring nothing falls through the cracks.
+                        </p>
+                        <ul class="step-features">
+                            <li>Centralized queue for all operational work</li>
+                            <li>Priority-based routing and assignment</li>
+                            <li>SLA tracking and escalation rules</li>
+                        </ul>
+                    </div>
+
+                    <!-- Workflows -->
+                    <div class="step-content" data-step="workflows">
+                        <span class="step-badge roadmap">
+                            <span class="step-badge-dot"></span>
+                            Roadmap
+                        </span>
+                        <span class="step-number">03</span>
+                        <h3 class="step-title">Workflows</h3>
+                        <p class="step-description">
+                            A workflow system that creates flexibility for administrators to implement and customize business processes while ensuring compliance.
+                        </p>
+                        <ul class="step-features">
+                            <li>Triggered by time or data changes</li>
+                            <li>Branch logic based on action results</li>
+                            <li>Version control with rollback capabilities</li>
+                        </ul>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="step-content" data-step="actions">
+                        <span class="step-badge roadmap">
+                            <span class="step-badge-dot"></span>
+                            Roadmap
+                        </span>
+                        <span class="step-number">04</span>
+                        <h3 class="step-title">Actions</h3>
+                        <p class="step-description">
+                            System-defined discrete and atomic units of servicing "work" — the building blocks that power every workflow.
+                        </p>
+                        <ul class="step-features">
+                            <li>Atomic, reusable units of servicing logic</li>
+                            <li>Consistent behavior across all contexts</li>
+                            <li>Comprehensive logging and auditability</li>
+                        </ul>
+                    </div>
+
+                    <!-- AI Agents -->
+                    <div class="step-content" data-step="ai-agents">
+                        <span class="step-badge roadmap">
+                            <span class="step-badge-dot"></span>
+                            Roadmap
+                        </span>
+                        <span class="step-number">05</span>
+                        <h3 class="step-title">AI Agents</h3>
+                        <p class="step-description">
+                            Intelligent agents trained on specific servicing processes to add capacity and automate complex decisions.
+                        </p>
+                        <ul class="step-features">
+                            <li>Trained on ValonOS operational data</li>
+                            <li>Human-in-the-loop for high-stakes decisions</li>
+                            <li>Continuous learning from feedback</li>
+                        </ul>
+                    </div>
+
+                    <!-- Applications -->
+                    <div class="step-content" data-step="applications">
+                        <span class="step-badge roadmap">
+                            <span class="step-badge-dot"></span>
+                            Roadmap
+                        </span>
+                        <span class="step-number">06</span>
+                        <h3 class="step-title">Applications</h3>
+                        <p class="step-description">
+                            Purpose-built applications that run on ValonOS, providing specialized interfaces for different user types.
+                        </p>
+                        <ul class="step-features">
+                            <li>Homeowner portal for self-service</li>
+                            <li>Servicer dashboard for operations</li>
+                            <li>API access for custom integrations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Stack Section -->
+    <section class="stack-section">
+        <div class="stack-container">
+            <!-- Header -->
+            <div class="stack-section-header">
+                <span class="stack-eyebrow">Architecture</span>
+                <h2 class="stack-title">Fully Vertically Integrated</h2>
+                <p class="stack-description">
+                    ValonOS is designed as a compound product. Each layer builds on the one below it, creating increasing leverage and automation as more runs on the platform. For the builders joining us now, this is a rare opportunity to help architect the foundation that future industries will run on.
+                </p>
+            </div>
+
+            <!-- Stack Diagram -->
+            <div class="stack-wrapper">
+                <!-- Logo header -->
+                <div class="stack-header">
+                    <div class="stack-logo">
+                        <img src="Images/valon logo_Black.png" alt="ValonOS" class="stack-logo-image">
+                    </div>
+                </div>
+
+                <!-- Layers -->
+                <div class="stack-layers">
+                    <!-- Top row: 3 cards -->
+                    <div class="stack-row cols-3">
+                        <div class="stack-card">
+                            <div class="stack-card-title">Human Agents</div>
+                            <div class="stack-card-description">Reviews AI work and makes decisions</div>
+                        </div>
+                        <div class="stack-card">
+                            <div class="stack-card-title">LLM AI Agents</div>
+                            <div class="stack-card-description">Trained on servicing processes</div>
+                        </div>
+                        <div class="stack-card">
+                            <div class="stack-card-title">Deterministic Automation</div>
+                            <div class="stack-card-description">Rule-based system automation</div>
+                        </div>
+                    </div>
+
+                    <!-- Second row: 2 cards -->
+                    <div class="stack-row cols-2">
+                        <div class="stack-card">
+                            <div class="stack-card-title">Customizable Workflows</div>
+                            <div class="stack-card-description">Triggers + actions into processes</div>
+                        </div>
+                        <div class="stack-card">
+                            <div class="stack-card-title">APIs & Valon Data Schema</div>
+                            <div class="stack-card-description">RESTful API powering applications</div>
+                        </div>
+                    </div>
+
+                    <!-- Third row: Full width -->
+                    <div class="stack-layer-full">
+                        <div class="stack-card-title">Servicing Actions</div>
+                        <div class="stack-card-description">System-defined atomic units of servicing work</div>
+                    </div>
+
+                    <!-- Foundation: Full width with emphasis -->
+                    <div class="stack-layer-full foundation">
+                        <div class="stack-card-title">Servicing Infrastructure & Unified Financial Service</div>
+                        <div class="stack-card-description">Multi-party double-entry accounting + money movements + auto-reconciliation</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="stack-footer">
+                <p>Each layer builds on the foundation below, creating compound leverage</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Articles -->
+    <section class="section" id="articles">
+        <div class="section-header">
+            <h2>Featured Articles</h2>
+        </div>
+        <div class="articles-grid">
+            <article class="article-card">
+                <img src="Images/InsideValon-1.png" alt="AI in Mortgage Servicing">
+                <div class="article-content">
+                    <h4>Why I Believe AI is the Future of Mortgage Servicing</h4>
+                    <p class="author">Amy Hennig, Director of Product</p>
+                    <a href="#">Read more →</a>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="Images/InsideValon-2.png" alt="Scaling Systems">
+                <div class="article-content">
+                    <h4>Why I Joined Valon: Designing Systems That Scale from the Ground Up</h4>
+                    <p class="author">Charles Wong, Product Manager II</p>
+                    <a href="#">Read more →</a>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="Images/InsideValon-3.png" alt="Building Valon">
+                <div class="article-content">
+                    <h4>Why I Bet on Valon - and Why You Might Too</h4>
+                    <p class="author">Alex Dao, Director of Engineering</p>
+                    <a href="#">Read more →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="Images/valon logo.png" alt="Valon" class="footer-logo">
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <a href="#overview">Our Story</a>
+                    <a href="#components">Company</a>
+                    <a href="#careers">Careers</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="#articles">Blog</a>
+                    <a href="#docs">Documentation</a>
+                </div>
+            </div>
+            <div class="footer-social">
+                <h4>Social</h4>
+                <a href="#linkedin">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // HERO SCROLL ANIMATION
+        // ============================================
+        const heroScrollContainer = document.querySelector('.hero-scroll-container');
+        const hero = document.getElementById('hero');
+        const bgGold = document.getElementById('bgGold');
+        const bgBlue = document.getElementById('bgBlue');
+        const goldText = document.getElementById('goldText');
+        const blueText = document.getElementById('blueText');
+        const navbar = document.getElementById('navbar');
+        const logoImage = document.getElementById('logoImage');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const loginBtn = document.querySelector('.login-btn');
+
+        const goldWords = goldText.querySelectorAll('.word');
+        const blueWords = blueText.querySelectorAll('.word');
+
+        function handleHeroScroll() {
+            const scrollTop = window.scrollY;
+            const containerHeight = heroScrollContainer.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const scrollableDistance = containerHeight - windowHeight;
+
+            // Progress from 0 to 1 through the hero section
+            let progress = Math.min(Math.max(scrollTop / scrollableDistance, 0), 1);
+
+            // Unpin hero when scroll past container
+            if (scrollTop >= scrollableDistance) {
+                hero.style.position = 'absolute';
+                hero.style.top = `${scrollableDistance}px`;
+            } else {
+                hero.style.position = 'fixed';
+                hero.style.top = '0';
+            }
+
+            // Background transition (blue first, then gold)
+            bgBlue.style.opacity = 1 - progress;
+            bgGold.style.opacity = progress;
+
+            // Blue text: fade out from 0-50% scroll (shows first)
+            const blueOpacity = Math.max(1 - (progress * 2.5), 0);
+            blueText.style.opacity = blueOpacity;
+
+            // Animate blue words out (staggered)
+            blueWords.forEach((word, index) => {
+                const wordProgress = Math.min(Math.max((progress * 2) - (index * 0.1), 0), 1);
+                word.style.opacity = 1 - wordProgress;
+                word.style.transform = `translateY(${wordProgress * -15}px)`;
+            });
+
+            // Gold text: fade in from 40-100% scroll
+            const goldProgress = Math.max((progress - 0.4) / 0.6, 0);
+            goldText.style.opacity = goldProgress;
+
+            // Animate gold words in (staggered)
+            goldWords.forEach((word, index) => {
+                const wordProgress = Math.min(Math.max((goldProgress * 1.5) - (index * 0.1), 0), 1);
+                word.style.opacity = wordProgress;
+                word.style.transform = `translateY(${(1 - wordProgress) * 15}px)`;
+            });
+
+            // Nav color transition - switch from light to dark theme at midpoint
+            if (progress > 0.5) {
+                navbar.classList.add('dark-theme');
+                navbar.classList.remove('light-theme');
+            } else {
+                navbar.classList.remove('dark-theme');
+                navbar.classList.add('light-theme');
+            }
+        }
+
+        // ============================================
+        // CORE COMPONENTS SCROLL
+        // ============================================
+        const stepContents = document.querySelectorAll('.step-content');
+        const stepNavItems = document.querySelectorAll('.step-nav-item');
+        const visuals = document.querySelectorAll('.visual-content');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-40% 0px -40% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const stepId = entry.target.dataset.step;
+
+                    // Update nav
+                    stepNavItems.forEach(item => {
+                        item.classList.toggle('active', item.dataset.step === stepId);
+                    });
+
+                    // Update visuals
+                    visuals.forEach(visual => {
+                        visual.classList.toggle('active', visual.dataset.visual === stepId);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        stepContents.forEach(step => observer.observe(step));
+
+        // Click navigation
+        stepNavItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetStep = item.dataset.step;
+                const targetContent = document.querySelector(`.step-content[data-step="${targetStep}"]`);
+
+                if (targetContent) {
+                    targetContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
+
+        // Scroll handler
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(handleHeroScroll);
+        });
+
+        // Initialize
+        handleHeroScroll();
+    </script>
+</body>
+</html>

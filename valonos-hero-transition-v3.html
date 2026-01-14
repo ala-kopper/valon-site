@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ValonOS – Hero Transition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --blue-primary: #1a4b9c;
+      --blue-dark: #0f2a5c;
+      --gold: #c9a227;
+      --gold-muted: #b8973b;
+      --cream: #faf9f7;
+      --black: #1a1918;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Scroll container for pinned effect */
+    .hero-scroll-container {
+      height: 250vh;
+    }
+
+    /* Fixed hero */
+    .hero {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    /* Background layers */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+
+    .hero-bg-gold {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 120% 80% at 80% 20%, #e8dcc8 0%, #d4c4a8 30%, #c9b896 60%, #f5f0e6 100%);
+    }
+
+    .hero-bg-blue {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 120% 80% at 50% 0%, #0a2e6c 0%, #1a4b9c 25%, #4a7cc9 50%, #a8c8e8 75%, #e8f0f8 100%);
+      opacity: 0;
+    }
+
+    /* Text blocks - positioned absolutely so they can crossfade */
+    .hero-text-block {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 900px;
+      padding: 0 4rem;
+    }
+
+    /* Headlines */
+    .hero-headline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-headline-secondary {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      font-style: italic;
+    }
+
+    /* Gold state text colors */
+    .gold-text .hero-headline {
+      color: var(--black);
+    }
+
+    .gold-text .hero-headline-secondary {
+      color: rgba(26, 25, 24, 0.4);
+    }
+
+    /* Blue state text colors */
+    .blue-text .hero-headline {
+      color: var(--white);
+    }
+
+    .blue-text .hero-headline-secondary {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Individual words for animation */
+    .word {
+      display: inline-block;
+    }
+
+    /* Content after hero */
+    .content {
+      position: relative;
+      z-index: 2;
+      background: var(--white);
+      min-height: 100vh;
+      padding: 6rem 4rem;
+    }
+
+    .content h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .content p {
+      font-size: 1.1rem;
+      color: #5a5652;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--black);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .logo.light {
+      color: var(--white);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--black);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a.light {
+      color: var(--white);
+    }
+
+    .login-btn {
+      background: var(--white);
+      color: var(--black);
+      border: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-text-block {
+        padding: 0 2rem;
+      }
+
+      .hero-headline,
+      .hero-headline-secondary {
+        font-size: 2.5rem;
+      }
+
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#" class="logo" id="logo">Valon</a>
+    <div class="nav-links">
+      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Our Story</a>
+      <a href="#" class="nav-link">Company</a>
+      <a href="#" class="nav-link">Blog</a>
+      <a href="#" class="nav-link">Careers</a>
+      <button class="login-btn">Log In</button>
+    </div>
+  </nav>
+
+  <!-- Hero scroll container -->
+  <div class="hero-scroll-container">
+    <section class="hero">
+      <!-- Background layers -->
+      <div class="hero-bg">
+        <div class="hero-bg-gold" id="bgGold"></div>
+        <div class="hero-bg-blue" id="bgBlue"></div>
+      </div>
+
+      <!-- Gold state text -->
+      <div class="hero-text-block gold-text" id="goldText">
+        <h1 class="hero-headline">
+          <span class="word">ValonOS:</span>
+          <span class="word">AI-Native</span>
+        </h1>
+        <p class="hero-headline-secondary">
+          <span class="word">Servicing</span>
+          <span class="word">Platform</span>
+        </p>
+      </div>
+
+      <!-- Blue state text -->
+      <div class="hero-text-block blue-text" id="blueText">
+        <h1 class="hero-headline">
+          <span class="word">One</span>
+          <span class="word">unified</span>
+          <span class="word">system.</span>
+        </h1>
+        <p class="hero-headline-secondary">
+          <span class="word">Infinite</span>
+          <span class="word">operational</span>
+          <span class="word">leverage.</span>
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Content after hero -->
+  <div class="content">
+    <h2>What We're Building</h2>
+    <p>ValonOS is an AI-native, unified system of record for mortgage servicing. It replaces the fragmented legacy stack that most servicers rely on today.</p>
+  </div>
+
+  <script>
+    const heroScrollContainer = document.querySelector('.hero-scroll-container');
+    const hero = document.querySelector('.hero');
+    const bgGold = document.getElementById('bgGold');
+    const bgBlue = document.getElementById('bgBlue');
+    const goldText = document.getElementById('goldText');
+    const blueText = document.getElementById('blueText');
+    const logo = document.getElementById('logo');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    const goldWords = goldText.querySelectorAll('.word');
+    const blueWords = blueText.querySelectorAll('.word');
+
+    function handleHeroScroll() {
+      const scrollTop = window.scrollY;
+      const containerHeight = heroScrollContainer.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const scrollableDistance = containerHeight - windowHeight;
+      
+      // Progress from 0 to 1 through the hero section
+      let progress = Math.min(Math.max(scrollTop / scrollableDistance, 0), 1);
+      
+      // Unpin hero when scroll past container
+      if (scrollTop >= scrollableDistance) {
+        hero.style.position = 'absolute';
+        hero.style.top = `${scrollableDistance}px`;
+      } else {
+        hero.style.position = 'fixed';
+        hero.style.top = '0';
+      }
+
+      // Background transition
+      bgGold.style.opacity = 1 - progress;
+      bgBlue.style.opacity = progress;
+
+      // Gold text: fade out from 0-50% scroll
+      const goldOpacity = Math.max(1 - (progress * 2.5), 0);
+      goldText.style.opacity = goldOpacity;
+      
+      // Animate gold words out (staggered)
+      goldWords.forEach((word, index) => {
+        const wordProgress = Math.min(Math.max((progress * 2) - (index * 0.1), 0), 1);
+        word.style.opacity = 1 - wordProgress;
+        word.style.transform = `translateY(${wordProgress * -15}px)`;
+      });
+
+      // Blue text: fade in from 40-100% scroll
+      const blueProgress = Math.max((progress - 0.4) / 0.6, 0);
+      blueText.style.opacity = blueProgress;
+      
+      // Animate blue words in (staggered)
+      blueWords.forEach((word, index) => {
+        const wordProgress = Math.min(Math.max((blueProgress * 1.5) - (index * 0.1), 0), 1);
+        word.style.opacity = wordProgress;
+        word.style.transform = `translateY(${(1 - wordProgress) * 15}px)`;
+      });
+
+      // Nav color transition
+      if (progress > 0.5) {
+        logo.classList.add('light');
+        navLinks.forEach(link => link.classList.add('light'));
+      } else {
+        logo.classList.remove('light');
+        navLinks.forEach(link => link.classList.remove('light'));
+      }
+    }
+
+    // Initialize
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(handleHeroScroll);
+    });
+    
+    // Run on load
+    handleHeroScroll();
+  </script>
+</body>
+</html>
