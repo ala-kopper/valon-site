@@ -438,7 +438,12 @@ function handleCtaScroll() {
   const cta = document.querySelector('.cta-section');
   if (!cta) return;
   const rect = cta.getBoundingClientRect();
-  const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (rect.height + window.innerHeight * 0.5)));
+
+  // Much more gradual progress calculation - extends the transition range significantly
+  const rawProgress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (rect.height + window.innerHeight * 2)));
+
+  // Apply easing function for even smoother transition
+  const progress = rawProgress * rawProgress * (3 - 2 * rawProgress); // Smooth step easing
 
   const blueEnd = { r: 26, g: 75, b: 156 };
   const blackEnd = { r: 10, g: 10, b: 10 };
@@ -453,7 +458,7 @@ function handleCtaScroll() {
 
   cta.style.background = `linear-gradient(to bottom, #ffffff 0%, #e8f0f8 15%, rgb(${197 - progress * 60}, ${217 - progress * 60}, ${240 - progress * 80}) 35%, rgb(${midR}, ${midG}, ${midB}) 55%, rgb(${endR + 30}, ${endG + 30}, ${endB + 30}) 75%, rgb(${endR}, ${endG}, ${endB}) 100%)`;
 
-  cta.classList.toggle('dark', progress > 0.5);
+  cta.classList.toggle('dark', progress > 0.65);
 }
 
 window.addEventListener('scroll', () => requestAnimationFrame(handleCtaScroll));
